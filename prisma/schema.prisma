@@ -1,0 +1,235 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum IdeaStatus {
+  SPARK
+  RESEARCH
+  PROTOTYPE
+  ACTIVE
+  SHELVED
+}
+
+enum ProjectStatus {
+  ACTIVE
+  MAINTENANCE
+  ARCHIVED
+}
+
+enum AppType {
+  WEB
+  API
+  CLI
+  SERVICE
+  MOBILE
+}
+
+enum BusinessLegalType {
+  COMPANY
+  STUDIO
+  AGENCY
+  FREELANCE
+}
+
+enum BusinessStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum LabType {
+  VIRTUALIZATION
+  PHYSICAL_NETWORK
+  HYBRID_SANDBOX
+}
+
+enum LabStatus {
+  ONLINE
+  MAINTENANCE
+  OFFLINE
+}
+
+enum SkillCategory {
+  LANGUAGES
+  SYSTEMS_NETWORKING
+  FRAMEWORKS
+  DATABASE_INFRA
+}
+
+enum JourneyCategory {
+  FOUNDATION
+  CAREER
+  PROJECT_LAUNCH
+  INFRASTRUCTURE_BUILD
+}
+
+model Idea {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  summary     String
+  problem     String     @db.Text
+  solution    String     @db.Text
+  status      IdeaStatus @default(SPARK)
+  isPublic    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // 1-to-0..1 relation: An idea can graduate into a Project
+  project     Project?
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  title       String
+  tagline     String
+  description String        @db.Text
+  status      ProjectStatus @default(ACTIVE)
+  featured    Boolean       @default(false)
+  repoUrl     String?
+  liveUrl     String?
+  isPublic    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Source Idea link
+  ideaId      String?       @unique
+  idea        Idea?         @relation(fields: [ideaId], references: [id], onDelete: SetNull)
+
+  // A Project contains one or more Applications
+  applications Application[]
+
+  // Linked Labs for testing/development
+  labs        NetworkLab[]
+
+  // Demonstrated skills
+  skills      Skill[]
+
+  // Linked milestones
+  milestones  JourneyMilestone[]
+}
+
+model Application {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  summary     String
+  appType     AppType  @default(WEB)
+  techStack   String[]
+  repoUrl     String?
+  liveUrl     String?
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Belongs to a Project
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  // Businesses using this application
+  businessUsages BusinessApplication[]
+
+  // Linked Labs for testing
+  labs        NetworkLab[]
+
+  // Demonstrated skills
+  skills      Skill[]
+}
+
+model Business {
+  id          String            @id @default(cuid())
+  slug        String            @unique
+  name        String
+  legalType   BusinessLegalType @default(STUDIO)
+  role        String
+  summary     String
+  websiteUrl  String?
+  status      BusinessStatus    @default(ACTIVE)
+  isPublic    Boolean           @default(true)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Applications used by this business
+  applications BusinessApplication[]
+
+  // Linked milestones
+  milestones   JourneyMilestone[]
+}
+
+model BusinessApplication {
+  id            String      @id @default(cuid())
+  businessId    String
+  applicationId String
+  purpose       String
+  createdAt     DateTime    @default(now())
+
+  business      Business    @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@unique([businessId, applicationId])
+}
+
+model NetworkLab {
+  id            String    @id @default(cuid())
+  slug          String    @unique
+  name          String
+  summary       String
+  labType       LabType   @default(VIRTUALIZATION)
+  hypervisor    String
+  networking    String
+  workloads     String
+  topologyNotes String    @db.Text
+  status        LabStatus @default(ONLINE)
+  isPublic      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Many-to-many: Projects tested/hosted here
+  projects      Project[]
+
+  // Many-to-many: Applications tested/hosted here
+  applications  Application[]
+
+  // Skills exercised in this lab
+  skills        Skill[]
+
+  // Linked milestones
+  milestones    JourneyMilestone[]
+}
+
+model Skill {
+  id          String        @id @default(cuid())
+  name        String        @unique
+  category    SkillCategory
+  highlight   Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+
+  projects    Project[]
+  applications Application[]
+  labs        NetworkLab[]
+}
+
+model JourneyMilestone {
+  id          String          @id @default(cuid())
+  date        DateTime
+  title       String
+  narrative   String          @db.Text
+  category    JourneyCategory
+  isPublic    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+
+  projectId   String?
+  project     Project?        @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  businessId  String?
+  business    Business?       @relation(fields: [businessId], references: [id], onDelete: SetNull)
+
+  labId       String?
+  lab         NetworkLab?     @relation(fields: [labId], references: [id], onDelete: SetNull)
+}
