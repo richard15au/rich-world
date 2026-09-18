@@ -1,0 +1,838 @@
+/* RICH WORLD Light Dashboard Theme for Homepage */
+.rich-home-root {
+  --home-bg: #f5f7fb;
+  --home-card-bg: #ffffff;
+  --home-text-title: #0f172a;
+  --home-text-body: #475569;
+  --home-text-muted: #94a3b8;
+  --home-primary-blue: #2563eb;
+  --home-navy: #0e1e3e;
+  --home-border: #e2e8f0;
+  
+  background-color: var(--home-bg);
+  color: var(--home-text-title);
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+  font-family: var(--font-sans);
+  color-scheme: light;
+}
+
+/* ==================================================
+   LEFT SIDEBAR
+   ================================================== */
+.rich-home-sidebar {
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+  background-color: #ffffff;
+  border-right: 1px solid var(--home-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem 0.95rem 0.65rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 40;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.rich-sidebar-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Blank Avatar Placeholder */
+.rich-sidebar-avatar-blank {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  position: relative;
+}
+
+.rich-sidebar-name {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--home-text-title);
+  margin-top: 0.55rem;
+  letter-spacing: -0.015em;
+}
+
+.rich-sidebar-role {
+  font-size: 0.7rem;
+  font-weight: 550;
+  color: #64748b;
+  margin-top: 0.12rem;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.rich-sidebar-builder {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--home-primary-blue);
+  margin-top: 0.12rem;
+}
+
+.rich-sidebar-location {
+  font-size: 0.68rem;
+  color: var(--home-text-muted);
+  margin-top: 0.12rem;
+}
+
+/* Social Icon Pills */
+.rich-sidebar-socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.65rem;
+}
+
+.rich-social-btn {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.rich-social-btn:hover {
+  background-color: #f8fafc;
+  color: var(--home-primary-blue);
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+/* Sidebar Nav */
+.rich-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+  margin-top: 1rem;
+}
+
+.rich-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 11px;
+  font-size: 0.82rem;
+  font-weight: 550;
+  color: #475569;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.rich-nav-item:hover {
+  background-color: #f8fafc;
+  color: var(--home-text-title);
+  border-color: #e2e8f0;
+}
+
+.rich-nav-item.active {
+  background-color: #e0edff;
+  color: #1d4ed8;
+  font-weight: 650;
+  border-color: #bfdbfe;
+}
+
+.rich-nav-item.active svg {
+  color: #2563eb;
+}
+
+/* Sidebar Footer Handwritten Notes */
+.rich-sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.65rem;
+}
+
+.rich-sidebar-notes {
+  font-family: var(--font-handwriting), 'Caveat', cursive;
+  font-size: 1.1rem;
+  line-height: 1.18;
+  color: #2563eb;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+.rich-sidebar-underline {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 85px;
+  height: 6px;
+}
+
+.rich-sidebar-version {
+  font-size: 0.7rem;
+  color: var(--home-text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ==================================================
+   MAIN CONTENT AREA
+   ================================================== */
+.rich-home-main {
+  flex: 1;
+  min-width: 0;
+  padding: 1.1rem 2.25rem 0.85rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* TOP HEADER ROW: Hero on Left, Logo on Right */
+.rich-home-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.rich-home-hero {
+  display: flex;
+  flex-direction: column;
+}
+
+.rich-hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.22em;
+  color: var(--home-primary-blue);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.rich-hero-title {
+  font-size: clamp(2.05rem, 2.55vw, 2.6rem);
+  font-weight: 850;
+  letter-spacing: -0.035em;
+  color: var(--home-text-title);
+  line-height: 1.05;
+  margin-bottom: 0.25rem;
+}
+
+.rich-hero-grow {
+  color: var(--home-primary-blue);
+  position: relative;
+  display: inline-block;
+}
+
+.rich-hero-grow-underline {
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 9px;
+}
+
+.rich-hero-desc {
+  font-size: 0.94rem;
+  color: #475569;
+  line-height: 1.35;
+  max-width: 780px;
+}
+
+/* Top Right Logo Branding */
+.rich-top-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.rich-top-logo-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+}
+
+.rich-logo-globe {
+  width: 44px;
+  height: 44px;
+}
+
+.rich-logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.rich-logo-title {
+  font-size: 1.2rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  color: #0b193d;
+  line-height: 1.1;
+}
+
+.rich-logo-subtitle {
+  font-size: 0.6rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ==================================================
+   TOOLS MARQUEE
+   ================================================== */
+.rich-marquee-capsule {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  height: 44px;
+  margin: 0.75rem 0 0.85rem 0;
+  position: relative;
+  width: 100%;
+}
+
+.rich-marquee-label {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  color: #1e3a8a;
+  padding: 0 1.35rem;
+  white-space: nowrap;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background: #ffffff;
+  z-index: 2;
+  text-transform: uppercase;
+}
+
+.rich-marquee-track-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
+}
+
+.rich-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 1.65rem;
+  white-space: nowrap;
+  animation: richMarqueeScroll 35s linear infinite;
+  padding: 0 1.25rem;
+}
+
+.rich-marquee-track.paused {
+  animation-play-state: paused;
+}
+
+@keyframes richMarqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.rich-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.rich-marquee-divider {
+  color: #cbd5e1;
+  font-size: 0.78rem;
+}
+
+.rich-marquee-pause-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.6rem 0 0.4rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  color: #475569;
+  transition: all 0.2s;
+  z-index: 2;
+}
+
+.rich-marquee-pause-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* ==================================================
+   2x2 FOUR MAIN CARDS GRID
+   ================================================== */
+.rich-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem 1.25rem;
+  width: 100%;
+}
+
+/* Common Card Base */
+.rich-feature-card {
+  border-radius: 24px;
+  border: 1px solid var(--home-border);
+  box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+  padding: 1.05rem 1.35rem;
+  display: grid;
+  grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 220px;
+  box-sizing: border-box;
+}
+
+.rich-feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.06), 0 4px 10px -2px rgba(0, 0, 0, 0.02);
+}
+
+.rich-card-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+  min-width: 0;
+}
+
+.rich-card-top-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-bottom: 0.45rem;
+  box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.12);
+}
+
+.rich-card-title {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--home-text-title);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.1rem;
+}
+
+.rich-card-subtitle {
+  font-size: 0.78rem;
+  font-weight: 550;
+  color: #64748b;
+  margin-bottom: 0.35rem;
+  line-height: 1.25;
+}
+
+.rich-card-desc {
+  font-size: 0.76rem;
+  color: #475569;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+/* Explore Pill Button */
+.rich-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 0.35rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 650;
+  color: #1e293b;
+  text-decoration: none;
+  width: fit-content;
+  transition: all 0.2s ease;
+  margin-top: auto;
+}
+
+.rich-card-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateX(2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.rich-card-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.rich-card-btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* Card Visual Right Area */
+.rich-card-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+}
+
+.rich-card-img-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.rich-card-img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.35s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ==================================================
+   CARD 1: ABOUT SPECIFICS
+   ================================================== */
+.rich-card-about {
+  background: linear-gradient(135deg, #f8f7ff 0%, #f1effe 100%);
+  border-color: #e4e1ff;
+}
+.rich-card-about .rich-card-top-icon {
+  background: linear-gradient(135deg, #9061f9 0%, #7c3aed 100%);
+}
+
+.rich-card-img-about {
+  max-height: 240px;
+  filter: drop-shadow(0 14px 24px rgba(124, 58, 237, 0.10));
+}
+
+.rich-card-about:hover .rich-card-img-about {
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* ==================================================
+   CARD 2: PROJECTS & PRACTICES SPECIFICS
+   ================================================== */
+.rich-card-projects {
+  background: linear-gradient(135deg, #fffbf6 0%, #fff4ec 100%);
+  border-color: #fed7aa;
+}
+.rich-card-projects .rich-card-top-icon {
+  background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+}
+
+.rich-practices-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.16rem;
+  margin-bottom: 0.45rem;
+  list-style: none;
+  padding: 0;
+}
+
+.rich-practice-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.rich-practice-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f97316;
+  flex-shrink: 0;
+}
+
+.rich-card-img-projects {
+  max-height: 240px;
+  filter: drop-shadow(0 14px 24px rgba(234, 88, 12, 0.10));
+}
+
+.rich-card-projects:hover .rich-card-img-projects {
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* ==================================================
+   CARD 3: BUSINESS SOLUTIONS SPECIFICS
+   ================================================== */
+.rich-card-business {
+  background: linear-gradient(135deg, #f3fbf6 0%, #e9f8ee 100%);
+  border-color: #bbf7d0;
+}
+.rich-card-business .rich-card-top-icon {
+  background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+}
+
+.rich-card-bottom-action {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  position: relative;
+  z-index: 3;
+}
+
+.rich-card-handwritten-business {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-handwriting), 'Caveat', cursive;
+  font-size: 0.98rem;
+  line-height: 1.12;
+  color: #059669;
+  font-weight: 600;
+  transform: rotate(-4deg);
+  position: relative;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rich-handwritten-business-stroke {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 80px;
+  height: 5px;
+}
+
+.rich-card-img-business {
+  max-height: 225px;
+  filter: drop-shadow(0 14px 24px rgba(5, 150, 105, 0.08));
+}
+
+.rich-card-business:hover .rich-card-img-business {
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* ==================================================
+   CARD 4: 2D WORLD SPECIFICS
+   ================================================== */
+.rich-card-world {
+  background: linear-gradient(135deg, #eff8ff 0%, #e5f3ff 100%);
+  border-color: #bae6fd;
+}
+.rich-card-world .rich-card-top-icon {
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+}
+
+.rich-card-right-world .rich-card-img-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.rich-card-handwritten-world {
+  position: absolute;
+  top: 6px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: var(--font-handwriting), 'Caveat', cursive;
+  font-size: 1.15rem;
+  line-height: 1.12;
+  color: #0369a1;
+  font-weight: 600;
+  text-align: right;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.rich-card-img-world {
+  max-height: 255px;
+  filter: drop-shadow(0 16px 28px rgba(2, 132, 199, 0.12));
+}
+
+.rich-card-world:hover .rich-card-img-world {
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* ==================================================
+   BOTTOM FOOTER LINE
+   ================================================== */
+.rich-home-footer-line {
+  margin-top: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 0.2rem 0;
+}
+
+.rich-footer-divider {
+  flex: 1;
+  max-width: 120px;
+  height: 1px;
+  background: #cbd5e1;
+}
+
+.rich-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.15rem;
+}
+
+.rich-footer-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #0b193d;
+}
+
+.rich-footer-subtitle {
+  font-size: 0.62rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  color: #64748b;
+}
+
+/* ==================================================
+   MOBILE TOGGLE & RESPONSIVE
+   ================================================== */
+.rich-mobile-topbar {
+  display: none;
+  background: #ffffff;
+  border-bottom: 1px solid var(--home-border);
+  padding: 0.75rem 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+}
+
+.rich-mobile-drawer {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .rich-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .rich-home-root {
+    flex-direction: column;
+  }
+  
+  .rich-home-sidebar {
+    display: none;
+  }
+  
+  .rich-mobile-topbar {
+    display: flex;
+  }
+  
+  .rich-mobile-drawer.open {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-bottom: 1px solid var(--home-border);
+    padding: 1.5rem;
+    gap: 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .rich-home-main {
+    padding: 1.25rem 1rem;
+  }
+
+  .rich-home-top-row {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .rich-top-logo {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .rich-feature-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .rich-card-right {
+    margin-top: 1.25rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .rich-card-img-container {
+    justify-content: center;
+  }
+
+  .rich-card-img {
+    max-height: 180px;
+  }
+}
