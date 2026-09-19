@@ -10,12 +10,34 @@
   --home-border: #e2e8f0;
   
   background-color: var(--home-bg);
+  background-image: 
+    linear-gradient(180deg, rgba(235, 243, 255, 0.52) 0%, rgba(245, 247, 251, 0.82) 42%, rgba(245, 247, 251, 0.92) 100%),
+    url('/images/rich-city-bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
   color: var(--home-text-title);
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
   display: flex;
   position: relative;
   font-family: var(--font-sans);
   color-scheme: light;
+  overflow: hidden;
+}
+
+/* ==================================================
+   ANIMATED SILK SHADER BACKGROUND
+   ================================================== */
+.rich-home-shader-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0.85;
 }
 
 /* ==================================================
@@ -25,18 +47,39 @@
   width: 220px;
   min-width: 220px;
   max-width: 220px;
-  background-color: #ffffff;
-  border-right: 1px solid var(--home-border);
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.25rem 0.95rem 0.65rem;
+  padding: 0.85rem 0.95rem 0.35rem;
   position: sticky;
   top: 0;
   height: 100vh;
   z-index: 40;
   box-sizing: border-box;
   overflow: hidden;
+}
+
+/* ==================================================
+   VERTICAL PARTITION LINE SEPARATING SIDEBAR & MAIN
+   ================================================== */
+.rich-sidebar-partition {
+  width: 2px;
+  min-width: 2px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #2563eb 0%,
+    #64748b 12%,
+    #94a3b8 50%,
+    #64748b 88%,
+    #2563eb 100%
+  );
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.28), 0 0 2px rgba(15, 23, 42, 0.2);
+  z-index: 42;
+  flex-shrink: 0;
 }
 
 .rich-sidebar-profile {
@@ -48,8 +91,8 @@
 
 /* Blank Avatar Placeholder */
 .rich-sidebar-avatar-blank {
-  width: 68px;
-  height: 68px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   border: 2px solid #ffffff;
@@ -105,7 +148,8 @@
   height: 27px;
   border-radius: 50%;
   border: 1px solid #e2e8f0;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
   color: #334155;
   display: flex;
   align-items: center;
@@ -116,7 +160,7 @@
 }
 
 .rich-social-btn:hover {
-  background-color: #f8fafc;
+  background-color: #ffffff;
   color: var(--home-primary-blue);
   border-color: #cbd5e1;
   transform: translateY(-1px);
@@ -126,16 +170,16 @@
 .rich-sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 0.22rem;
-  margin-top: 1rem;
+  gap: 0.15rem;
+  margin-top: 0.65rem;
 }
 
 .rich-nav-item {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.45rem 0.75rem;
-  border-radius: 11px;
+  gap: 0.65rem;
+  padding: 0.38rem 0.7rem;
+  border-radius: 10px;
   font-size: 0.82rem;
   font-weight: 550;
   color: #475569;
@@ -145,13 +189,15 @@
 }
 
 .rich-nav-item:hover {
-  background-color: #f8fafc;
+  background-color: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
   color: var(--home-text-title);
-  border-color: #e2e8f0;
+  border-color: rgba(226, 232, 240, 0.8);
 }
 
 .rich-nav-item.active {
-  background-color: #e0edff;
+  background-color: rgba(224, 237, 255, 0.8);
+  backdrop-filter: blur(8px);
   color: #1d4ed8;
   font-weight: 650;
   border-color: #bfdbfe;
@@ -165,8 +211,8 @@
 .rich-sidebar-bottom {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  padding-top: 0.65rem;
+  gap: 0.2rem;
+  padding-top: 0.35rem;
 }
 
 .rich-sidebar-notes {
@@ -199,13 +245,19 @@
 .rich-home-main {
   flex: 1;
   min-width: 0;
-  padding: 1.1rem 2.25rem 0.85rem 2.25rem;
+  height: 100vh;
+  max-height: 100vh;
+  padding: 0.65rem 1.85rem 0.35rem 1.85rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   max-width: 100%;
   margin: 0;
   box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
 }
 
 /* TOP HEADER ROW: Hero on Left, Logo on Right */
@@ -213,8 +265,9 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: 0.25rem;
+  gap: 1.5rem;
+  margin-bottom: 0.1rem;
+  flex-shrink: 0;
 }
 
 .rich-home-hero {
@@ -228,7 +281,7 @@
   letter-spacing: 0.22em;
   color: var(--home-primary-blue);
   text-transform: uppercase;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.1rem;
 }
 
 .rich-hero-title {
@@ -237,7 +290,7 @@
   letter-spacing: -0.035em;
   color: var(--home-text-title);
   line-height: 1.05;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.15rem;
 }
 
 .rich-hero-grow {
@@ -257,7 +310,7 @@
 .rich-hero-desc {
   font-size: 0.94rem;
   color: #475569;
-  line-height: 1.35;
+  line-height: 1.25;
   max-width: 780px;
 }
 
@@ -268,43 +321,57 @@
   align-items: flex-end;
   text-align: right;
   flex-shrink: 0;
-  margin-top: 0.2rem;
+  margin-top: 0.1rem;
 }
 
 .rich-top-logo-badge {
-  display: flex;
+  display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.35rem;
   text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
 }
 
-.rich-logo-globe {
-  width: 44px;
-  height: 44px;
+.rich-top-logo-badge:hover {
+  transform: translateY(-2px);
+}
+
+.rich-revolving-earth-wrapper {
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.rich-top-logo-badge:hover .rich-revolving-earth-wrapper {
+  transform: scale(1.08);
 }
 
 .rich-logo-text {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  text-align: center;
 }
 
 .rich-logo-title {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 850;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   color: #0b193d;
   line-height: 1.1;
+  transition: color 0.2s ease;
+}
+
+.rich-top-logo-badge:hover .rich-logo-title {
+  color: #1d4ed8;
 }
 
 .rich-logo-subtitle {
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   font-weight: 750;
   letter-spacing: 0.16em;
   color: #64748b;
   text-transform: uppercase;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 /* ==================================================
@@ -318,10 +385,11 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  height: 44px;
-  margin: 0.75rem 0 0.85rem 0;
+  height: 32px;
+  margin: 0.25rem 0 0.35rem 0;
   position: relative;
   width: 100%;
+  flex-shrink: 0;
 }
 
 .rich-marquee-label {
@@ -329,7 +397,7 @@
   font-weight: 800;
   letter-spacing: 0.09em;
   color: #1e3a8a;
-  padding: 0 1.35rem;
+  padding: 0 1rem;
   white-space: nowrap;
   border-right: 1px solid #e2e8f0;
   display: flex;
@@ -388,15 +456,15 @@
 }
 
 .rich-marquee-pause-btn {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0.6rem 0 0.4rem;
+  margin: 0 0.4rem 0 0.3rem;
   cursor: pointer;
   flex-shrink: 0;
   color: #475569;
@@ -413,25 +481,29 @@
    2x2 FOUR MAIN CARDS GRID
    ================================================== */
 .rich-cards-grid {
+  flex: 1;
+  min-height: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.9rem 1.25rem;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 0.85rem;
   width: 100%;
 }
 
 /* Common Card Base */
 .rich-feature-card {
-  border-radius: 24px;
+  border-radius: 18px;
   border: 1px solid var(--home-border);
   box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
-  padding: 1.05rem 1.35rem;
+  padding: 0.55rem 0.85rem;
   display: grid;
-  grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
-  gap: 0.5rem;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.25fr);
+  gap: 0.45rem;
   position: relative;
   overflow: hidden;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 220px;
+  min-height: 0;
+  height: 100%;
   box-sizing: border-box;
 }
 
@@ -446,18 +518,19 @@
   justify-content: space-between;
   z-index: 2;
   min-width: 0;
+  height: 100%;
 }
 
 .rich-card-top-icon {
-  width: 35px;
-  height: 35px;
-  border-radius: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  margin-bottom: 0.45rem;
-  box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.12);
+  margin-bottom: 0.15rem;
+  box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12);
 }
 
 .rich-card-title {
@@ -465,36 +538,37 @@
   font-weight: 800;
   color: var(--home-text-title);
   letter-spacing: -0.02em;
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.04rem;
+  line-height: 1.15;
 }
 
 .rich-card-subtitle {
   font-size: 0.78rem;
   font-weight: 550;
   color: #64748b;
-  margin-bottom: 0.35rem;
-  line-height: 1.25;
+  margin-bottom: 0.15rem;
+  line-height: 1.2;
 }
 
 .rich-card-desc {
   font-size: 0.76rem;
   color: #475569;
-  line-height: 1.35;
-  margin-bottom: 0.5rem;
+  line-height: 1.25;
+  margin-bottom: 0.2rem;
 }
 
 /* Explore Pill Button */
 .rich-card-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.6rem;
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1.5px solid #e2e8f0;
   border-radius: 9999px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  padding: 0.35rem 0.9rem;
-  font-size: 0.78rem;
-  font-weight: 650;
+  box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
+  padding: 0.42rem 1.15rem;
+  font-size: 0.98rem;
+  font-weight: 700;
   color: #1e293b;
   text-decoration: none;
   width: fit-content;
@@ -505,16 +579,18 @@
 .rich-card-btn:hover {
   background: #f8fafc;
   border-color: #cbd5e1;
-  transform: translateX(2px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transform: translateX(3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .rich-card-btn svg {
+  width: 17px;
+  height: 17px;
   transition: transform 0.2s ease;
 }
 
 .rich-card-btn:hover svg {
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
 
 /* Card Visual Right Area */
@@ -526,7 +602,8 @@
   z-index: 1;
   width: 100%;
   height: 100%;
-  min-height: 200px;
+  min-height: 0;
+  overflow: visible;
 }
 
 .rich-card-img-container {
@@ -541,8 +618,10 @@
 .rich-card-img {
   width: auto;
   max-width: 100%;
-  height: auto;
+  height: 100%;
+  max-height: 100%;
   object-fit: contain;
+  object-position: right center;
   display: block;
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.35s ease;
   pointer-events: none;
@@ -561,12 +640,13 @@
 }
 
 .rich-card-img-about {
-  max-height: 240px;
-  filter: drop-shadow(0 14px 24px rgba(124, 58, 237, 0.10));
+  transform: scale(1.24);
+  transform-origin: right center;
+  filter: drop-shadow(0 12px 24px rgba(124, 58, 237, 0.14));
 }
 
 .rich-card-about:hover .rich-card-img-about {
-  transform: translateY(-3px) scale(1.02);
+  transform: scale(1.3) translateY(-2px);
 }
 
 /* ==================================================
@@ -583,8 +663,8 @@
 .rich-practices-list {
   display: flex;
   flex-direction: column;
-  gap: 0.16rem;
-  margin-bottom: 0.45rem;
+  gap: 0.05rem;
+  margin-bottom: 0.15rem;
   list-style: none;
   padding: 0;
 }
@@ -592,10 +672,11 @@
 .rich-practice-item {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   font-size: 0.75rem;
   font-weight: 600;
   color: #334155;
+  line-height: 1.15;
 }
 
 .rich-practice-dot {
@@ -607,12 +688,13 @@
 }
 
 .rich-card-img-projects {
-  max-height: 240px;
-  filter: drop-shadow(0 14px 24px rgba(234, 88, 12, 0.10));
+  transform: scale(1.22);
+  transform-origin: right center;
+  filter: drop-shadow(0 12px 24px rgba(234, 88, 12, 0.14));
 }
 
 .rich-card-projects:hover .rich-card-img-projects {
-  transform: translateY(-3px) scale(1.02);
+  transform: scale(1.28) translateY(-2px);
 }
 
 /* ==================================================
@@ -629,10 +711,10 @@
 .rich-card-bottom-action {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
   margin-top: auto;
   position: relative;
-  z-index: 3;
+  z-index: 5;
 }
 
 .rich-card-handwritten-business {
@@ -640,7 +722,7 @@
   flex-direction: column;
   font-family: var(--font-handwriting), 'Caveat', cursive;
   font-size: 0.98rem;
-  line-height: 1.12;
+  line-height: 1.05;
   color: #059669;
   font-weight: 600;
   transform: rotate(-4deg);
@@ -658,12 +740,13 @@
 }
 
 .rich-card-img-business {
-  max-height: 225px;
-  filter: drop-shadow(0 14px 24px rgba(5, 150, 105, 0.08));
+  transform: scale(1.2);
+  transform-origin: right center;
+  filter: drop-shadow(0 12px 20px rgba(5, 150, 105, 0.12));
 }
 
 .rich-card-business:hover .rich-card-img-business {
-  transform: translateY(-3px) scale(1.02);
+  transform: scale(1.26) translateY(-2px);
 }
 
 /* ==================================================
@@ -686,14 +769,14 @@
 
 .rich-card-handwritten-world {
   position: absolute;
-  top: 6px;
-  right: 14px;
+  top: 0px;
+  right: 6px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   font-family: var(--font-handwriting), 'Caveat', cursive;
   font-size: 1.15rem;
-  line-height: 1.12;
+  line-height: 1.05;
   color: #0369a1;
   font-weight: 600;
   text-align: right;
@@ -702,24 +785,26 @@
 }
 
 .rich-card-img-world {
-  max-height: 255px;
-  filter: drop-shadow(0 16px 28px rgba(2, 132, 199, 0.12));
+  transform: scale(1.22);
+  transform-origin: right center;
+  filter: drop-shadow(0 12px 24px rgba(2, 132, 199, 0.14));
 }
 
 .rich-card-world:hover .rich-card-img-world {
-  transform: translateY(-3px) scale(1.02);
+  transform: scale(1.28) translateY(-2px);
 }
 
 /* ==================================================
    BOTTOM FOOTER LINE
    ================================================== */
 .rich-home-footer-line {
-  margin-top: 0.85rem;
+  margin-top: 0.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1.25rem;
-  padding: 0.2rem 0;
+  padding: 0;
+  flex-shrink: 0;
 }
 
 .rich-footer-divider {
@@ -780,9 +865,13 @@
 @media (max-width: 768px) {
   .rich-home-root {
     flex-direction: column;
+    height: auto;
+    max-height: none;
+    overflow: visible;
   }
   
-  .rich-home-sidebar {
+  .rich-home-sidebar,
+  .rich-sidebar-partition {
     display: none;
   }
   
@@ -801,6 +890,9 @@
   }
 
   .rich-home-main {
+    height: auto;
+    max-height: none;
+    overflow: visible;
     padding: 1.25rem 1rem;
   }
 
@@ -815,9 +907,15 @@
     text-align: left;
   }
 
+  .rich-cards-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
   .rich-feature-card {
     grid-template-columns: 1fr;
     min-height: auto;
+    height: auto;
   }
 
   .rich-card-right {

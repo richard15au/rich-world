@@ -29,7 +29,7 @@ export default function HomeCardsGrid() {
           </div>
           <Link href="/about" className="rich-card-btn" title="Explore About page">
             <span>Explore</span>
-            <ArrowRight size={14} />
+            <ArrowRight size={17} />
           </Link>
         </div>
 
@@ -85,7 +85,7 @@ export default function HomeCardsGrid() {
 
           <Link href="/projects" className="rich-card-btn" title="Explore Projects & Practices">
             <span>Explore</span>
-            <ArrowRight size={14} />
+            <ArrowRight size={17} />
           </Link>
         </div>
 
@@ -122,7 +122,7 @@ export default function HomeCardsGrid() {
           <div className="rich-card-bottom-action">
             <Link href="/businesses" className="rich-card-btn" title="Explore Business Solutions">
               <span>Explore</span>
-              <ArrowRight size={14} />
+              <ArrowRight size={17} />
             </Link>
 
             <div className="rich-card-handwritten-business" aria-hidden="true">
@@ -169,7 +169,7 @@ export default function HomeCardsGrid() {
 
           <Link href="/world" className="rich-card-btn" title="Enter Rich City 2D World">
             <span style={{ color: '#0284c7' }}>Enter Rich City</span>
-            <ArrowRight size={14} color="#0284c7" />
+            <ArrowRight size={17} color="#0284c7" />
           </Link>
         </div>
 

@@ -6,6 +6,8 @@ import HomeHero from '@/components/home/HomeHero';
 import ToolsMarquee from '@/components/ToolsMarquee';
 import HomeCardsGrid from '@/components/home/HomeCardsGrid';
 import HomeFooterLine from '@/components/home/HomeFooterLine';
+import { ShaderBackground } from '@/components/ui/silk-shader';
+import AmbientTechBackground from '@/components/home/AmbientTechBackground';
 import '@/components/home/home.css';
 
 export const metadata: Metadata = {
@@ -17,8 +19,17 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="rich-home-root">
+      {/* Animated Silk Shader & Minimal Ambient Tech Motion Layer */}
+      <div className="rich-home-shader-bg" aria-hidden="true">
+        <ShaderBackground />
+        <AmbientTechBackground />
+      </div>
+
       {/* Left Sidebar: Fixed/Sticky Desktop & Mobile Drawer */}
       <HomeSidebar />
+
+      {/* Dedicated Vertical Partition Line */}
+      <div className="rich-sidebar-partition" aria-hidden="true" />
 
       {/* Main Content Area */}
       <div className="rich-home-main">
