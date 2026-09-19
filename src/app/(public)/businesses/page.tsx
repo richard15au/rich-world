@@ -188,7 +188,7 @@ export default async function BusinessesPage() {
                       gap: '0.65rem',
                       padding: '0.85rem 1rem',
                       borderRadius: 'var(--radius-md)',
-                      background: 'rgba(255, 255, 255, 0.02)',
+                      background: 'rgba(241, 245, 249, 0.65)',
                       border: '1px solid var(--border-subtle)',
                     }}
                   >

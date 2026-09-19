@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   Home,
@@ -9,8 +10,8 @@ import {
   Code2,
   Briefcase,
   Gamepad2,
-  MessageSquare,
-  Moon,
+  Mail,
+  Send,
   Menu,
   X,
 } from 'lucide-react';
@@ -21,6 +22,7 @@ const NAV_ITEMS = [
   { href: '/projects', label: 'Projects & Practices', icon: Code2 },
   { href: '/businesses', label: 'Business Solutions', icon: Briefcase },
   { href: '/world', label: '2D World', icon: Gamepad2 },
+  { href: '/contact', label: 'Contact', icon: Send },
 ];
 
 export default function HomeSidebar() {
@@ -31,27 +33,50 @@ export default function HomeSidebar() {
     <>
       {/* Mobile Topbar with Hamburger */}
       <div className="rich-mobile-topbar">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-          <div className="rich-sidebar-avatar-blank" style={{ width: '34px', height: '34px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <div
+            style={{
+              width: '38px',
+              height: '42px',
+              position: 'relative',
+              flexShrink: 0,
+            }}
+          >
+            <Image
+              src="/images/profile-transparent.png"
+              alt="Richard Vitug"
+              fill
+              sizes="38px"
+              style={{ objectFit: 'contain', objectPosition: 'center bottom' }}
+              priority
+            />
+          </div>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+            <span style={{ fontWeight: 750, fontSize: '0.95rem', color: '#0f172a' }}>
+              Richard Vitug
+            </span>
             <svg
-              width="20"
-              height="20"
+              width="15"
+              height="15"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#94a3b8"
-              strokeWidth="1.5"
+              className="rich-verified-badge"
+              aria-label="Verified Builder"
             >
-              <circle cx="12" cy="8" r="4" fill="#cbd5e1" stroke="none" />
+              <title>Verified Builder</title>
               <path
-                d="M 4 21 C 4 16.5 7.5 13 12 13 C 16.5 13 20 16.5 20 21"
-                fill="#cbd5e1"
-                stroke="none"
+                d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6 0.457-1.52.197-3.19-.8-4.19s-2.67-1.26-4.19-.8C14.7 2.64 13.33 1.77 11.75 1.77s-2.95 0.87-3.61 2.14c-1.52-0.46-3.19-0.2-4.19 0.8s-1.26 2.67-0.8 4.19C1.88 9.55 1 10.92 1 12.5s0.88 2.95 2.15 3.6c-0.46 1.52-0.2 3.19 0.8 4.19s2.67 1.26 4.19 0.8c0.66 1.27 2.03 2.14 3.61 2.14s2.95-0.87 3.61-2.14c1.52 0.46 3.19 0.2 4.19-0.8s1.26-2.67 0.8-4.19c1.27-0.65 2.15-2.02 2.15-3.6z"
+                fill="#2563eb"
+              />
+              <path
+                d="M7.75 12.5l3 3 6.5-6.5"
+                stroke="#ffffff"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
-          <span style={{ fontWeight: 750, fontSize: '0.95rem', color: '#0f172a' }}>
-            Richard Vitug
-          </span>
         </div>
         <button
           type="button"
@@ -119,12 +144,25 @@ export default function HomeSidebar() {
                 <circle cx="4" cy="4" r="2" />
               </svg>
             </a>
-            <span className="rich-social-btn" title="Discord">
-              <MessageSquare size={14} />
-            </span>
-            <span className="rich-social-btn" title="Theme Toggle">
-              <Moon size={14} />
-            </span>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rich-social-btn"
+              title="Facebook"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a
+              href="mailto:richardvitug015@gmail.com"
+              className="rich-social-btn"
+              title="Gmail"
+              aria-label="Gmail"
+            >
+              <Mail size={14} />
+            </a>
           </div>
         </div>
       )}
@@ -133,25 +171,43 @@ export default function HomeSidebar() {
       <aside className="rich-home-sidebar" aria-label="Main Navigation Sidebar">
         {/* Profile Card Section */}
         <div className="rich-sidebar-profile">
-          {/* Blank profile avatar silhouette */}
-          <div className="rich-sidebar-avatar-blank" aria-label="Blank profile avatar placeholder">
+          {/* Transparent Blended Portrait (Sample 1 Style: no circle, no frame, bottom feathered fade) */}
+          <div className="rich-sidebar-avatar-sample1" aria-label="Richard Vitug Profile Portrait">
+            <Image
+              src="/images/profile-transparent.png"
+              alt="Richard Vitug"
+              width={380}
+              height={460}
+              className="rich-sidebar-photo-sample1"
+              priority
+            />
+          </div>
+
+          <div className="rich-sidebar-name-row">
+            <h2 className="rich-sidebar-name">Richard Vitug</h2>
             <svg
-              width="44"
-              height="44"
+              width="17"
+              height="17"
               viewBox="0 0 24 24"
               fill="none"
+              className="rich-verified-badge"
+              aria-label="Verified Builder"
             >
-              <circle cx="12" cy="8" r="4.2" fill="#cbd5e1" />
+              <title>Verified Builder</title>
               <path
-                d="M 4 21 C 4 16.2 7.5 13 12 13 C 16.5 13 20 16.2 20 21"
-                fill="#cbd5e1"
+                d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6 0.457-1.52.197-3.19-.8-4.19s-2.67-1.26-4.19-.8C14.7 2.64 13.33 1.77 11.75 1.77s-2.95 0.87-3.61 2.14c-1.52-0.46-3.19-0.2-4.19 0.8s-1.26 2.67-0.8 4.19C1.88 9.55 1 10.92 1 12.5s0.88 2.95 2.15 3.6c-0.46 1.52-0.2 3.19 0.8 4.19s2.67 1.26 4.19 0.8c0.66 1.27 2.03 2.14 3.61 2.14s2.95-0.87 3.61-2.14c1.52 0.46 3.19 0.2 4.19-0.8s1.26-2.67 0.8-4.19c1.27-0.65 2.15-2.02 2.15-3.6z"
+                fill="#2563eb"
+              />
+              <path
+                d="M7.75 12.5l3 3 6.5-6.5"
+                stroke="#ffffff"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
-
-          <h2 className="rich-sidebar-name">Richard Vitug</h2>
-          <p className="rich-sidebar-role">IT Student | Aspiring AI Engineer</p>
-          <p className="rich-sidebar-builder">Builder of RICH WORLD</p>
+          <p className="rich-sidebar-role">IT Student</p>
           <p className="rich-sidebar-location">Sydney, Australia</p>
 
           {/* Social / Contact Icons */}
@@ -181,12 +237,25 @@ export default function HomeSidebar() {
                 <circle cx="4" cy="4" r="2" />
               </svg>
             </a>
-            <span className="rich-social-btn" title="Discord / Community" style={{ cursor: 'pointer' }}>
-              <MessageSquare size={14} />
-            </span>
-            <span className="rich-social-btn" title="Theme Mode" style={{ cursor: 'pointer' }}>
-              <Moon size={14} />
-            </span>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rich-social-btn"
+              title="Facebook"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a
+              href="mailto:richardvitug015@gmail.com"
+              className="rich-social-btn"
+              title="Gmail"
+              aria-label="Gmail"
+            >
+              <Mail size={14} />
+            </a>
           </div>
         </div>
 

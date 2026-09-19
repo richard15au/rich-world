@@ -7,7 +7,7 @@ interface RevolvingEarthProps {
   className?: string;
 }
 
-export default function RevolvingEarth({ size = 56, className = '' }: RevolvingEarthProps) {
+export default function RevolvingEarth({ size = 52, className = '' }: RevolvingEarthProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -56,126 +56,32 @@ export default function RevolvingEarth({ size = 56, className = '' }: RevolvingE
 
         const cx = size / 2;
         const cy = size / 2;
-        const globeR = size * 0.27; // Globe radius (~15.1px)
+        const globeR = size * 0.28; // Globe radius (~14.6px)
         const globeTilt = 0.22;     // Globe axial tilt ~12.5 deg
 
         // 3D Orbital Plane Geometry
         const orbitTiltZ = -0.22;   // Diagonal tilt of orbit plane (~-12.6 deg)
         const orbitTiltX = 0.38;    // Inclination tilt (~21.8 deg)
-        const orbitR = size * 0.46; // Orbit major radius (~25.8px)
-        const orbitRy = orbitR * Math.sin(orbitTiltX); // Orbit minor radius (~9.6px)
+        const orbitR = size * 0.46; // Orbit major radius (~24px)
+        const orbitRy = orbitR * Math.sin(orbitTiltX); // Orbit minor radius (~9px)
 
         // Orbital revolution angle (1 full revolution every ~3.6s)
         const orbitSpeed = 1.75;
         const orbitAngle = time * orbitSpeed;
         const globeAngle = time * 0.85;
 
-        // Position in untilted orbit plane
+        // Position of the orbiting satellite beacon along the 3D ring
         const cosA = Math.cos(orbitAngle);
         const sinA = Math.sin(orbitAngle);
-        const x0 = orbitR * cosA;
-        const y0 = orbitRy * sinA;
-
-        // Apply orbitTiltZ rotation to get screen position
         const cosZ = Math.cos(orbitTiltZ);
         const sinZ = Math.sin(orbitTiltZ);
-        const rwX = cx + (x0 * cosZ - y0 * sinZ);
-        const rwY = cy + (x0 * sinZ + y0 * cosZ);
 
+        const x0 = orbitR * cosA;
+        const y0 = orbitRy * sinA;
+        const beaconX = cx + (x0 * cosZ - y0 * sinZ);
+        const beaconY = cy + (x0 * sinZ + y0 * cosZ);
         // z > 0: In front of the globe; z < 0: Behind the globe
-        const rwZ = sinA;
-        const rwScale = 1.0 + rwZ * 0.32; // Perspective scaling (0.68x in back, 1.32x in front)
-        const rwWidthScale = 0.72 + 0.28 * Math.abs(sinA); // Foreshortening width as it turns edges
-
-        // Exact tangent vector along the tilted orbit to ALIGN the text while orbiting
-        const dx0 = -orbitR * sinA;
-        const dy0 = orbitRy * cosA;
-        const tx = dx0 * cosZ - dy0 * sinZ;
-        const ty = dx0 * sinZ + dy0 * cosZ;
-
-        // Tangent slope angle normalized to [-PI/2, PI/2] so text never turns upside-down
-        let alignAngle = Math.atan2(ty, tx);
-        while (alignAngle > Math.PI / 2) alignAngle -= Math.PI;
-        while (alignAngle < -Math.PI / 2) alignAngle += Math.PI;
-
-        // Helper to draw 3D Extruded Block "RW" Text
-        const draw3DRW = (isFront: boolean) => {
-          ctx.font = '900 13px "Inter", "Segoe UI", system-ui, sans-serif';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.letterSpacing = '1.2px';
-
-          if (isFront) {
-            // 1. Ambient Drop Shadow cast onto the globe & space
-            ctx.shadowColor = 'rgba(2, 6, 23, 0.85)';
-            ctx.shadowBlur = 9;
-            ctx.shadowOffsetX = 1.5;
-            ctx.shadowOffsetY = 3.0;
-            ctx.fillStyle = 'rgba(2, 6, 23, 0.55)';
-            ctx.fillText('RW', 0, 0);
-
-            // 2. Multi-layered 3D Extrusion Walls (real physical block thickness)
-            ctx.shadowBlur = 0;
-            ctx.shadowOffsetX = 0;
-            ctx.shadowOffsetY = 0;
-
-            const depthLayers = 5;
-            const stepX = 0.40;
-            const stepY = 0.55;
-
-            for (let i = depthLayers; i >= 1; i--) {
-              const ox = i * stepX;
-              const oy = i * stepY;
-              const wallColor = i === depthLayers
-                ? '#081530'
-                : i > 2
-                ? '#102a6b'
-                : '#1d4ed8';
-              ctx.fillStyle = wallColor;
-              ctx.fillText('RW', ox, oy);
-              ctx.strokeStyle = '#0a1a3e';
-              ctx.lineWidth = 0.6;
-              ctx.strokeText('RW', ox, oy);
-            }
-
-            // 3. Electric Cyan Outer Glow Bevel
-            ctx.shadowColor = '#38bdf8';
-            ctx.shadowBlur = 12;
-            ctx.strokeStyle = '#38bdf8';
-            ctx.lineWidth = 2.8;
-            ctx.strokeText('RW', 0, 0);
-
-            // 4. Luminous Front Face (pure white)
-            ctx.shadowBlur = 0;
-            ctx.fillStyle = '#ffffff';
-            ctx.fillText('RW', 0, 0);
-
-            // 5. Metallic Inner Border
-            ctx.strokeStyle = '#93c5fd';
-            ctx.lineWidth = 0.8;
-            ctx.strokeText('RW', 0, 0);
-
-            // 6. Top Specular Glint Highlight
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-            ctx.fillText('RW', -0.2, -0.3);
-          } else {
-            // Back holographic 3D text (smoothly visible in distance through globe)
-            for (let i = 3; i >= 1; i--) {
-              ctx.fillStyle = 'rgba(15, 35, 80, 0.45)';
-              ctx.fillText('RW', i * 0.25, i * 0.35);
-            }
-
-            ctx.shadowColor = '#38bdf8';
-            ctx.shadowBlur = 8;
-            ctx.fillStyle = 'rgba(147, 197, 253, 0.85)';
-            ctx.fillText('RW', 0, 0);
-
-            ctx.shadowBlur = 0;
-            ctx.strokeStyle = 'rgba(56, 189, 248, 0.75)';
-            ctx.lineWidth = 1.2;
-            ctx.strokeText('RW', 0, 0);
-          }
-        };
+        const beaconZ = sinA;
 
         // -------------------------------------------------------------
         // 1. DRAW BACK ELEMENTS (Z < 0: Behind the Globe)
@@ -187,15 +93,15 @@ export default function RevolvingEarth({ size = 56, className = '' }: RevolvingE
         ctx.rotate(orbitTiltZ);
         ctx.beginPath();
         ctx.ellipse(0, 0, orbitR, orbitRy, 0, Math.PI, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(56, 189, 248, 0.38)';
-        ctx.lineWidth = 1.4;
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+        ctx.lineWidth = 1.3;
         ctx.setLineDash([4, 3]);
         ctx.stroke();
         ctx.restore();
 
-        // If RW is currently behind the globe (rwZ < 0)
-        if (rwZ < 0) {
-          // Stardust particle trail behind moving RW
+        // If satellite beacon is currently behind the globe (beaconZ < 0)
+        if (beaconZ < 0) {
+          // Stardust particle trail behind moving satellite
           for (let i = 1; i <= 4; i++) {
             const trailA = orbitAngle - i * 0.09;
             const tCos = Math.cos(trailA);
@@ -207,16 +113,18 @@ export default function RevolvingEarth({ size = 56, className = '' }: RevolvingE
 
             ctx.beginPath();
             ctx.arc(tx, ty, Math.max(0.6, 1.2 - i * 0.2), 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(56, 189, 248, ${0.45 - i * 0.1})`;
+            ctx.fillStyle = `rgba(56, 189, 248, ${0.40 - i * 0.08})`;
             ctx.fill();
           }
 
-          // Draw back 3D "RW" aligned with orbit
+          // Back satellite beacon
           ctx.save();
-          ctx.translate(rwX, rwY);
-          ctx.rotate(alignAngle);
-          ctx.scale(rwScale * rwWidthScale, rwScale);
-          draw3DRW(false);
+          ctx.beginPath();
+          ctx.arc(beaconX, beaconY, 1.8, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(147, 197, 253, 0.75)';
+          ctx.shadowColor = '#38bdf8';
+          ctx.shadowBlur = 6;
+          ctx.fill();
           ctx.restore();
         }
 
@@ -235,7 +143,7 @@ export default function RevolvingEarth({ size = 56, className = '' }: RevolvingE
         ctx.arc(cx, cy, globeR * 1.38, 0, Math.PI * 2);
         ctx.fill();
 
-        // Holographic 3D Sphere Base (transparency ~0.86 allows seeing the orbiting RW through globe)
+        // 3D Sphere Base with Rich Directional Shading
         const sphereGrad = ctx.createRadialGradient(
           cx - globeR * 0.32,
           cy - globeR * 0.32,
@@ -244,10 +152,10 @@ export default function RevolvingEarth({ size = 56, className = '' }: RevolvingE
           cy,
           globeR
         );
-        sphereGrad.addColorStop(0, 'rgba(37, 99, 235, 0.90)');   // Luminous top-left sun highlight
-        sphereGrad.addColorStop(0.35, 'rgba(29, 78, 216, 0.88)'); // Royal blue midtone
-        sphereGrad.addColorStop(0.72, 'rgba(11, 25, 61, 0.86)');  // Deep navy brand core
-        sphereGrad.addColorStop(1, 'rgba(3, 8, 22, 0.92)');       // Dark limb shadow
+        sphereGrad.addColorStop(0, '#2563eb');    // Luminous top-left sunlit sapphire
+        sphereGrad.addColorStop(0.35, '#1d4ed8'); // Royal blue midtone
+        sphereGrad.addColorStop(0.72, '#0b193d'); // Deep navy brand core
+        sphereGrad.addColorStop(1, '#030816');    // Dark limb shadow
 
         ctx.fillStyle = sphereGrad;
         ctx.beginPath();
@@ -341,8 +249,8 @@ export default function RevolvingEarth({ size = 56, className = '' }: RevolvingE
           cy - globeR * 0.42,
           globeR * 0.55
         );
-        glint.addColorStop(0, 'rgba(255, 255, 255, 0.48)');
-        glint.addColorStop(0.5, 'rgba(147, 197, 253, 0.18)');
+        glint.addColorStop(0, 'rgba(255, 255, 255, 0.55)');
+        glint.addColorStop(0.5, 'rgba(147, 197, 253, 0.20)');
         glint.addColorStop(1, 'rgba(255, 255, 255, 0)');
         ctx.fillStyle = glint;
         ctx.beginPath();
@@ -377,9 +285,9 @@ export default function RevolvingEarth({ size = 56, className = '' }: RevolvingE
         ctx.stroke();
         ctx.restore();
 
-        // If RW is currently in front of the globe (rwZ >= 0)
-        if (rwZ >= 0) {
-          // Stardust particle trail behind front RW
+        // If satellite beacon is currently in front of the globe (beaconZ >= 0)
+        if (beaconZ >= 0) {
+          // Stardust particle trail behind front satellite
           for (let i = 1; i <= 5; i++) {
             const trailA = orbitAngle - i * 0.08;
             const tCos = Math.cos(trailA);
@@ -390,7 +298,7 @@ export default function RevolvingEarth({ size = 56, className = '' }: RevolvingE
             const ty = cy + (tx0 * sinZ + ty0 * cosZ);
 
             ctx.beginPath();
-            ctx.arc(tx, ty, Math.max(0.8, 1.5 - i * 0.22), 0, Math.PI * 2);
+            ctx.arc(tx, ty, Math.max(0.8, 1.6 - i * 0.25), 0, Math.PI * 2);
             ctx.fillStyle = `rgba(56, 189, 248, ${0.75 - i * 0.13})`;
             ctx.shadowColor = '#38bdf8';
             ctx.shadowBlur = 5;
@@ -398,12 +306,25 @@ export default function RevolvingEarth({ size = 56, className = '' }: RevolvingE
             ctx.shadowBlur = 0;
           }
 
-          // Draw front 3D "RW" block text aligned with orbit
+          // Front glowing satellite beacon with flare
           ctx.save();
-          ctx.translate(rwX, rwY);
-          ctx.rotate(alignAngle);
-          ctx.scale(rwScale * rwWidthScale, rwScale);
-          draw3DRW(true);
+          // Outer flare glow
+          const flare = ctx.createRadialGradient(beaconX, beaconY, 0.5, beaconX, beaconY, 6.0);
+          flare.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+          flare.addColorStop(0.3, 'rgba(56, 189, 248, 0.85)');
+          flare.addColorStop(1, 'rgba(37, 99, 235, 0)');
+          ctx.fillStyle = flare;
+          ctx.beginPath();
+          ctx.arc(beaconX, beaconY, 6.0, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Bright white core
+          ctx.beginPath();
+          ctx.arc(beaconX, beaconY, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.shadowColor = '#38bdf8';
+          ctx.shadowBlur = 10;
+          ctx.fill();
           ctx.restore();
         }
       }
@@ -437,7 +358,7 @@ export default function RevolvingEarth({ size = 56, className = '' }: RevolvingE
         justifyContent: 'center',
         flexShrink: 0,
       }}
-      aria-label="3D Revolving Globe with Orbiting RW"
+      aria-label="3D Revolving Globe"
     >
       <canvas
         ref={canvasRef}

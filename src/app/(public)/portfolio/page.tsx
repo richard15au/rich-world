@@ -28,9 +28,9 @@ import ToolsMarquee from '@/components/ToolsMarquee';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Richard Vitug — Aspiring AI Engineer',
+  title: 'Portfolio | Richard Vitug — IT Student',
   description:
-    'Professional portfolio and engineering dashboard of Richard Vitug: IT Student, Aspiring AI Engineer, and Builder of RICH WORLD.',
+    'Professional portfolio and engineering dashboard of Richard Vitug: IT Student based in Sydney, Australia.',
 };
 
 export default async function PortfolioPage() {
@@ -183,7 +183,7 @@ export default async function PortfolioPage() {
                 </div>
 
                 <p style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--accent-cyan)' }}>
-                  IT Student | Aspiring AI Engineer
+                  IT Student
                 </p>
 
                 <div
@@ -201,8 +201,6 @@ export default async function PortfolioPage() {
                     <MapPin size={13} color="var(--accent-cyan)" />
                     Sydney, Australia
                   </span>
-                  <span>•</span>
-                  <span>Builder of RICH WORLD</span>
                 </div>
               </div>
             </div>
@@ -293,7 +291,7 @@ export default async function PortfolioPage() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Sparkles size={20} color="var(--accent-cyan)" />
-              <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#f8fafc' }}>Featured Build</h2>
+              <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-primary)' }}>Featured Build</h2>
             </div>
             <Link
               href="/projects"
@@ -480,7 +478,7 @@ export default async function PortfolioPage() {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <FolderGit2 size={20} color="var(--accent-indigo)" />
-              <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#f8fafc' }}>BUILDS</h2>
+              <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-primary)' }}>BUILDS</h2>
             </div>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
               Projects and applications powering the RICH WORLD digital ecosystem
@@ -529,8 +527,8 @@ export default async function PortfolioPage() {
                     style={{
                       padding: '1rem',
                       borderRadius: 'var(--radius-md)',
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      border: '1px solid rgba(255, 255, 255, 0.06)',
+                      background: 'rgba(241, 245, 249, 0.65)',
+                      border: '1px solid var(--border-subtle)',
                       display: 'flex',
                       flexDirection: 'column',
                       gap: '0.35rem',
@@ -539,7 +537,7 @@ export default async function PortfolioPage() {
                     className="interactive"
                   >
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span style={{ fontWeight: 600, fontSize: '0.95rem', color: '#f8fafc' }}>{proj.title}</span>
+                      <span style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-primary)' }}>{proj.title}</span>
                       <span className="badge badge-emerald" style={{ fontSize: '0.7rem' }}>{proj.status}</span>
                     </div>
                     <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)' }}>{proj.tagline}</p>
@@ -580,8 +578,8 @@ export default async function PortfolioPage() {
                     style={{
                       padding: '1rem',
                       borderRadius: 'var(--radius-md)',
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      border: '1px solid rgba(255, 255, 255, 0.06)',
+                      background: 'rgba(241, 245, 249, 0.65)',
+                      border: '1px solid var(--border-subtle)',
                       display: 'flex',
                       flexDirection: 'column',
                       gap: '0.35rem',
@@ -590,7 +588,7 @@ export default async function PortfolioPage() {
                     className="interactive"
                   >
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span style={{ fontWeight: 600, fontSize: '0.95rem', color: '#f8fafc' }}>{app.name}</span>
+                      <span style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-primary)' }}>{app.name}</span>
                       <span className="badge badge-cyan" style={{ fontSize: '0.7rem' }}>{app.appType}</span>
                     </div>
                     <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)' }}>{app.summary}</p>
@@ -646,7 +644,7 @@ export default async function PortfolioPage() {
             >
               Background & Focus
             </span>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#f8fafc' }}>About Me</h2>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)' }}>About Me</h2>
           </div>
           <Link
             href="/skills"
@@ -665,7 +663,7 @@ export default async function PortfolioPage() {
 
         <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.7, maxWidth: '900px' }}>
           <p style={{ marginBottom: '0.75rem' }}>
-            I am an IT Student and Aspiring AI Engineer based in Sydney, Australia. My work is anchored in understanding
+            I am an IT Student based in Sydney, Australia. My work is anchored in understanding
             how foundational technologies connect — starting from physical and virtual networks, through production web
             applications, up to intelligent systems and autonomous software agents.
           </p>
@@ -690,8 +688,8 @@ export default async function PortfolioPage() {
                   style={{
                     padding: '1rem',
                     borderRadius: 'var(--radius-md)',
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    border: '1px solid rgba(255, 255, 255, 0.06)',
+                    background: 'rgba(241, 245, 249, 0.65)',
+                    border: '1px solid var(--border-subtle)',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '0.35rem',
@@ -699,7 +697,7 @@ export default async function PortfolioPage() {
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <Icon size={15} color="var(--accent-cyan)" />
-                    <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#f1f5f9' }}>{area.name}</span>
+                    <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{area.name}</span>
                   </div>
                   <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>{area.desc}</p>
                 </div>
@@ -869,7 +867,7 @@ export default async function PortfolioPage() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Network size={18} color="var(--accent-amber)" />
-              <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#f8fafc' }}>Network Labs</h2>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)' }}>Network Labs</h2>
             </div>
             <Link
               href="/labs"
@@ -917,8 +915,8 @@ export default async function PortfolioPage() {
                   style={{
                     padding: '0.85rem',
                     borderRadius: 'var(--radius-md)',
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    border: '1px solid rgba(255, 255, 255, 0.06)',
+                    background: 'rgba(241, 245, 249, 0.65)',
+                    border: '1px solid var(--border-subtle)',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '0.25rem',
@@ -926,7 +924,7 @@ export default async function PortfolioPage() {
                   className="interactive"
                 >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#f8fafc' }}>{lab.name}</span>
+                    <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{lab.name}</span>
                     <span className="badge badge-amber" style={{ fontSize: '0.65rem' }}>{lab.status}</span>
                   </div>
                   <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{lab.summary}</p>
@@ -949,7 +947,7 @@ export default async function PortfolioPage() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Milestone size={18} color="var(--accent-emerald)" />
-              <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#f8fafc' }}>Journey</h2>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)' }}>Journey</h2>
             </div>
             <Link
               href="/journey"
@@ -996,15 +994,15 @@ export default async function PortfolioPage() {
                   style={{
                     padding: '0.85rem',
                     borderRadius: 'var(--radius-md)',
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    border: '1px solid rgba(255, 255, 255, 0.06)',
+                    background: 'rgba(241, 245, 249, 0.65)',
+                    border: '1px solid var(--border-subtle)',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '0.25rem',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#f8fafc' }}>{m.title}</span>
+                    <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{m.title}</span>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                       {new Date(m.date).toLocaleDateString()}
                     </span>

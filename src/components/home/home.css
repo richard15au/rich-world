@@ -89,27 +89,53 @@
   text-align: center;
 }
 
-/* Blank Avatar Placeholder */
-.rich-sidebar-avatar-blank {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  border: 2px solid #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+/* Sidebar Profile: Transparent Blended Portrait (Sample 1 Style) */
+.rich-sidebar-avatar-sample1 {
+  width: 165px;
+  height: 200px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #94a3b8;
-  position: relative;
+  margin-bottom: 0.15rem;
+  background: transparent;
+}
+
+.rich-sidebar-photo-sample1 {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  display: block;
+  filter: drop-shadow(0 6px 14px rgba(15, 23, 42, 0.08));
+  transition: transform 0.3s ease;
+}
+
+.rich-sidebar-avatar-sample1:hover .rich-sidebar-photo-sample1 {
+  transform: scale(1.03);
+}
+
+.rich-sidebar-name-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
 }
 
 .rich-sidebar-name {
-  font-size: 1.02rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 850;
   color: var(--home-text-title);
-  margin-top: 0.55rem;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.rich-verified-badge {
+  color: #2563eb;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .rich-sidebar-role {
@@ -315,13 +341,86 @@
 }
 
 /* Top Right Logo Branding */
+.rich-top-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* Stealth / Admin Header Trigger */
+.rich-admin-header-wrap {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.rich-admin-header-wrap.is-stealth {
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+.rich-admin-header-wrap.is-stealth:hover,
+.rich-admin-header-wrap.is-stealth:focus-within {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rich-admin-header-wrap.is-admin-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease;
+}
+
+.rich-admin-header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #334155;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.rich-admin-header-btn:hover {
+  background: #ffffff;
+  color: #2563eb;
+  border-color: #93c5fd;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+}
+
+.rich-admin-beacon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 6px #10b981;
+  display: inline-block;
+  animation: pulseBeacon 2s infinite ease-in-out;
+}
+
+.rich-admin-icon {
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
 .rich-top-logo {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   text-align: right;
   flex-shrink: 0;
-  margin-top: 0.1rem;
 }
 
 .rich-top-logo-badge {
@@ -837,6 +936,128 @@
 }
 
 /* ==================================================
+   SUBPAGE UNIFIED LAYOUT & TOP BAR
+   ================================================== */
+.rich-subpage-main {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 rgba(241, 245, 249, 0.5);
+  padding: 0;
+}
+
+.rich-subpage-main::-webkit-scrollbar {
+  width: 7px;
+}
+
+.rich-subpage-main::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0.4);
+}
+
+.rich-subpage-main::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.rich-subpage-main::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.rich-subpage-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.15rem 1.85rem 0 1.85rem;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rich-subpage-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.84rem;
+}
+
+.rich-breadcrumb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #64748b;
+  font-weight: 550;
+  text-decoration: none;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.rich-breadcrumb-link:hover {
+  color: var(--home-primary-blue);
+  background: rgba(37, 99, 235, 0.06);
+}
+
+.rich-breadcrumb-chevron {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.rich-breadcrumb-active {
+  font-weight: 700;
+  color: #0f172a;
+  padding: 0.2rem 0.65rem;
+  background: rgba(224, 237, 255, 0.75);
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+.rich-subpage-branding {
+  display: flex;
+  align-items: center;
+}
+
+.rich-subpage-content {
+  flex: 1;
+  padding: 0.35rem 1.85rem 2.5rem 1.85rem;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.rich-subpage-footer {
+  margin-top: auto;
+  padding: 1.5rem 1.85rem 2rem 1.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* ==================================================
    MOBILE TOGGLE & RESPONSIVE
    ================================================== */
 .rich-mobile-topbar {
@@ -896,6 +1117,31 @@
     padding: 1.25rem 1rem;
   }
 
+  .rich-subpage-main {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .rich-subpage-top-bar {
+    padding: 0.15rem 1rem 0 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .rich-subpage-content {
+    padding: 0.35rem 1rem 2.5rem 1rem;
+  }
+
   .rich-home-top-row {
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -934,3 +1180,83 @@
     max-height: 180px;
   }
 }
+
+/* ==================================================
+   BOTTOM RIGHT VISIT COUNTER (STEALTH / ADMIN)
+   ================================================== */
+.rich-visit-counter-wrap {
+  position: fixed;
+  bottom: 12px;
+  right: 18px;
+  z-index: 60;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.rich-visit-counter-wrap.is-stealth {
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rich-visit-counter-wrap.is-stealth:hover {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rich-visit-counter-wrap.is-admin {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease;
+}
+
+.rich-visit-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.26rem 0.65rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #475569;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  cursor: default;
+  transition: all 0.2s ease;
+}
+
+.rich-visit-pill:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: #0f172a;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.rich-visit-icon {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.rich-admin-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 6px #10b981;
+  flex-shrink: 0;
+}
+
+.rich-visit-badge {
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.06rem 0.32rem;
+  border-radius: 4px;
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+

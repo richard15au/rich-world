@@ -213,7 +213,7 @@ export default function WorldComingSoonPage() {
               fontWeight: 900,
               letterSpacing: '-0.03em',
               lineHeight: 1.1,
-              color: '#ffffff',
+              color: 'var(--text-primary)',
             }}
           >
             THE 2D PERSISTENT <br />

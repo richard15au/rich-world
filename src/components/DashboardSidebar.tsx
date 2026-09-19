@@ -216,9 +216,6 @@ export default function DashboardSidebar() {
                   </span>
                   <CheckCircle2 size={13} color="#2563eb" fill="#eff6ff" />
                 </div>
-                <div style={{ fontSize: '0.72rem', color: '#64748b' }}>
-                  Builder of RICH WORLD
-                </div>
               </div>
             </div>
 
@@ -234,7 +231,7 @@ export default function DashboardSidebar() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem' }}>
             <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#2563eb' }}>
-              IT Student | Aspiring AI Engineer
+              IT Student
             </div>
             <div
               style={{
