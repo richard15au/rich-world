@@ -10,6 +10,7 @@ import { ShaderBackground } from '@/components/ui/silk-shader';
 import AmbientTechBackground from '@/components/home/AmbientTechBackground';
 import VisitCounter from '@/components/VisitCounter';
 import '@/components/home/home.css';
+import '@/components/world/world.css';
 
 export default function PublicLayout({
   children,
@@ -18,6 +19,17 @@ export default function PublicLayout({
 }) {
   const pathname = usePathname();
   const isHomePage = pathname === '/';
+  const isWorldPage = pathname === '/world' || pathname.startsWith('/world');
+
+  // Full-screen viewport mode for RICH CITY 2D World
+  if (isWorldPage) {
+    return (
+      <div className="rich-world-layout-root">
+        {children}
+        <VisitCounter />
+      </div>
+    );
+  }
 
   // Helper to format breadcrumb title for subpages
   const getBreadcrumbTitle = (path: string) => {
